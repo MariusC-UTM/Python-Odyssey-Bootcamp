@@ -1,4 +1,5 @@
-# Aceasta este sarcina pentru lecția despre conceptele avansate ale programării orientate pe obiecte în Python, cum ar fi super() și self, getter/setter și property, privatizarea și tipurile de metode.
+# Aceasta este sarcina pentru lecția despre conceptele avansate ale programării orientate pe obiecte în Python,
+# cum ar fi super() și self, getter/setter și property, privatizarea și tipurile de metode.
 
 from sigmoid_check.python_odyssey.lesson_14.lesson_14 import Lesson14
 
@@ -45,13 +46,37 @@ Ce trebuie să faci:
 
 # CODUL TĂU VINE MAI JOS:
 class Utilizator:
-    pass
+    def __init__(self, nume):
+        self.nume = nume
+        self._nivel_acces = 'Default'
 
-class UtilizatorManager( ):
-    pass
+    def afiseaza_nivel_acces(self):
+        return f'{self.nume} are nivelul de acces {self._nivel_acces}.'
 
-class UtilizatorAdmin( ):
-    pass
+    def utilizeaza_sistem(self):
+        return f'{self.nume} poate utiliza funcții de bază ale sistemului.'
+
+class UtilizatorManager(Utilizator):
+    def __init__(self, nume):
+        super().__init__(nume)
+        self._nivel_acces = 'Manager'
+
+    def modifica_setari(self):
+        return f'{self.nume} poate modifica setările sistemului.'
+
+    def citeste_date_utilizator(self):
+        return f'{self.nume} poate citi datele utilizatorilor.'
+
+class UtilizatorAdmin(Utilizator):
+    def __init__(self, nume):
+        super().__init__(nume)
+        self._nivel_acces = 'Admin'
+
+    def modifica_setari(self):
+        return f'{self.nume} poate modifica setările sistemului.'
+
+    def modifica_date_utilizator(self):
+        return f'{self.nume} poate modifica datele utilizatorilor.'
 # CODUL TĂU VINE MAI SUS:
 
 
@@ -80,12 +105,50 @@ Ce trebuie să faci:
 
 # CODUL TĂU VINE MAI JOS:
 class user:
-    pass
-    
+    def __init__(self, nume):
+        self._nume = nume
+        self.__nivel_acces = "Default"
+
+    def get_nume(self):
+        return self._nume
+
+    def set_nume(self, nume):
+        self._nume = nume
+
+    def get_nivel_acces(self):
+        return self.__nivel_acces
+
+    def set_nivel_acces(self, nivel_acces):
+        self.__nivel_acces = nivel_acces
  
 class Sistem:
-    pass
+    def __init__(self):
+        self.__utilizatori = {}
 
+    def adauga_utilizator(self, utilizator):
+        id_utilizator = len(self.__utilizatori) + 1
+        self.__utilizatori[id_utilizator] = utilizator
+
+    def afiseaza_utilizatori(self):
+        return [utilizator.get_nume() for utilizator in self.__utilizatori.values()]
+
+    def verifica_nivel_acces(self, nume_utilizator):
+        for utilizator in self.__utilizatori.values():
+            if utilizator.get_nume() == nume_utilizator:
+                return utilizator.get_nivel_acces()
+        return None
+
+    def modifica_name_user(self, id_utilizator, nou_nume_utilizator):
+        if id_utilizator in self.__utilizatori:
+            self.__utilizatori[id_utilizator].set_nume(nou_nume_utilizator)
+
+    def sterge_utilizator(self, id_utilizator):
+        if id_utilizator in self.__utilizatori:
+            del self.__utilizatori[id_utilizator]
+
+    def modifica_nivel_acces(self, id_utilizator, nou_nivel_acces):
+        if id_utilizator in self.__utilizatori:
+            self.__utilizatori[id_utilizator].set_nivel_acces(nou_nivel_acces)
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -108,7 +171,21 @@ Ce trebuie să faci:
 
 # CODUL TĂU VINE MAI JOS:
 class TechSolutionsApp:
-    pass
+    versiune_aplicatie = "1.0"
+
+    def __init__(self, versiune_aplicatie):
+        self.versiune_aplicatie = versiune_aplicatie
+
+    @staticmethod
+    def market_view():
+        return "Vizualizare piață"
+
+    @classmethod
+    def delogat_view(cls):
+        return f"Versiunea aplicației este {cls.versiune_aplicatie}"
+
+    def account_view(self):
+        return f"Vizualizare aplicație user {self.versiune_aplicatie}"
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
