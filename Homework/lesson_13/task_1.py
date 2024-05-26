@@ -33,7 +33,10 @@ print(telefon.anul_producerii)          # Voi putea accesa anul producerii obiec
 
 # CODUL TĂU VINE MAI JOS:
 class Produs:
-    pass
+    def __init__(self, numele, pretul, anul_producerii):
+        self.numele = numele
+        self.pretul = pretul
+        self.anul_producerii = anul_producerii
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -53,8 +56,17 @@ Totodată aceasta va avea o metodă numită `upgrade_battery` care va primi un p
 """
 
 # CODUL TĂU VINE MAI JOS:
-class Telefon( ):
-    pass
+class Telefon(Produs):
+    def __init__(self, numele, pretul, anul_producerii, baterie_mAh, memorie_GB):
+        super().__init__(numele, pretul, anul_producerii)
+        self.baterie_mAh = baterie_mAh
+        self.memorie_GB = memorie_GB
+
+    def upgrade_memory(self, new_memory):
+        self.memorie_GB = new_memory
+
+    def upgrade_battery(self, new_battery):
+        self.baterie_mAh = new_battery
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -69,8 +81,17 @@ Totodată aceasta va avea o metodă numită `upgrade_os` care va primi un parame
 """
 
 # CODUL TĂU VINE MAI JOS:
-class Laptop( ):
-    pass
+class Laptop(Produs):
+    def __init__(self, numele, pretul, anul_producerii, sistem_de_operare, procesor):
+        super().__init__(numele, pretul, anul_producerii)
+        self.sistem_de_operare = sistem_de_operare
+        self.procesor = procesor
+
+    def upgrade_processor(self, new_processor):
+        self.procesor = new_processor
+
+    def upgrade_os(self, new_os):
+        self.sistem_de_operare = new_os
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -85,8 +106,17 @@ Totodată aceasta va avea o metodă numită `upgrade_autonomy` care va primi un 
 """
 
 # CODUL TĂU VINE MAI JOS:
-class Trotineta( ):
-    pass
+class Trotineta(Produs):
+    def __init__(self, numele, pretul, anul_producerii, viteza_maxima, autonomie_km):
+        super().__init__(numele, pretul, anul_producerii)
+        self.viteza_maxima = viteza_maxima
+        self.autonomie_km = autonomie_km
+
+    def upgrade_speed(self, new_speed):
+        self.viteza_maxima = new_speed
+
+    def upgrade_autonomy(self, new_autonomy):
+        self.autonomie_km = new_autonomy
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -113,8 +143,18 @@ print(iphone.produs_conectat.numele) # Va returna numele produsului conectat
 """
 
 # CODUL TĂU VINE MAI JOS:
-class AppleProduct( ):
-    pass
+class AppleProduct(Produs):
+    def __init__(self, numele, pretul, anul_producerii, culoare, produs_conectat = 'nimic'):
+        super().__init__(numele, pretul, anul_producerii)
+        self.culoare = culoare
+        self.produs_conectat = produs_conectat
+
+    def combine_products(self, product):
+        if isinstance(product, AppleProduct) and self.culoare == product.culoare:
+            self.produs_conectat = product
+            return 'Produsul a fost conectat cu succes'
+        else:
+            return 'Produsul nu poate fi conectat deoarece culorile nu coincid'
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -133,12 +173,16 @@ pixel = GoogleProduct("Pixel", 10000, 2020, "negru")
 home = GoogleProduct("Home", 500, 2021, "alb")
 pixel.combine_products(home) # În acest caz se va returna textul "Produsul a fost conectat cu succes" și dacă se va printa pixel.produs_conectat se va returna obiectul home
 print(pixel.produs_conectat.numele) # Va returna numele produsului conectat
-
 """
 
 # CODUL TĂU VINE MAI JOS:
-class GoogleProduct( ):
-    pass
+class GoogleProduct(AppleProduct):
+    def combine_products(self, product):
+        if isinstance(product, GoogleProduct):
+            self.produs_conectat = product
+            return "Produsul a fost conectat cu succes"
+        else:
+            return "Produsul nu poate fi conectat deoarece nu este de tip GoogleProduct"
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -161,7 +205,11 @@ print(magazin.returneaza_produs(iphone)) # Va returna textul "Produsul Iphone a 
 
 # CODUL TĂU VINE MAI JOS:
 class Magazin:
-    pass
+    def vinde_produs(self, produs):
+        return f"Produsul {produs.numele} a fost vândut cu succes"
+
+    def returneaza_produs(self, produs):
+        return f"Produsul {produs.numele} a fost returnat cu succes"
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
