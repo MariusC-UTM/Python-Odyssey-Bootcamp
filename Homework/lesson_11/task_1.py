@@ -14,8 +14,8 @@ Exemplu: task_1(1, 2, 3) ➞ 6
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_1():
-    pass
+def task_1(*args):
+    return sum(args)
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -29,8 +29,8 @@ Exemplu: task_2(1, 2, 'a', 'b') ➞ [1, 2]
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_2():
-    pass
+def task_2(*args):
+    return [arg for arg in args if isinstance(arg, int)]
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -43,8 +43,11 @@ Exemplu: task_3(1, 4, 5) ➞ 20
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_3():
-    pass
+def task_3(*args):
+    produs = 1
+    for num in args:
+        produs *= num
+    return produs
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -57,8 +60,11 @@ Exemplu: task_4(a=1, b=2, c=3) ➞ 'a 1 b 2 c 3'
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_4():
-    pass
+def task_4(**kwargs):
+    rezultat = []
+    for key, value in kwargs.items():
+        rezultat.append(f'{key} {value}')
+    return ' '.join(rezultat)
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -74,8 +80,10 @@ Exemplu: task_6(3, 1, 2, a=10, b=20, c='a', d='b') ➞ [1, 2, 3], ['c', 'd']
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_5():
-    pass
+def task_5(*args, **kwargs):
+    lista_int = sorted([arg for arg in args if isinstance(arg, int)])
+    lista_key = sorted([key for key, value in kwargs.items() if isinstance(value, str)])
+    return lista_int, lista_key
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -88,8 +96,10 @@ Exemplu: task_6(a=1, b=2, c=3) ➞ {'a': 1, 'b': 2, 'c': 3}
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_6():
-    pass
+def task_6(**kwargs):
+    # return {key: value for key, value in kwargs.items()}
+    # or
+    return kwargs
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -103,8 +113,8 @@ Exemplu: task_7(1, 'a', 2, 'b') ➞ {'str': ['a', 'b'], 'int': [1, 2]}
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_7():
-    pass
+def task_7(*args):
+    return {'str': [arg for arg in args if isinstance(arg, str)], 'int': [arg for arg in args if isinstance(arg, int)]}
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -118,8 +128,17 @@ Exemplu: task_8('madam', 'hello', 'level', 'world') ➞ {'palindrom': ['madam', 
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_8():
-    pass
+def task_8(*args):
+    # palindroame = []
+    # non_palindroame = []
+    # for arg in args:
+    #     if str(arg) == str(arg)[::-1]:
+    #         palindroame.append(arg)
+    #     else:
+    #         non_palindroame.append(arg)
+    # return {'palindrom': palindroame, 'non_palindrom': non_palindroame}
+    # or
+    return {'palindrom': [arg for arg in args if str(arg) == str(arg)[::-1]], 'non_palindrom': [arg for arg in args if str(arg) != str(arg)[::-1]]}
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -133,8 +152,8 @@ Exemplu: task_9(1, 2, 3, 4, 5, number=2) ➞ [2, 4]
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_9():
-    pass
+def task_9(*args, number):
+    return [arg for arg in args if arg % number == 0]
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -148,8 +167,8 @@ Exemplu: task_10(1, 2, 3, 4, 5, number=2) ➞ [2, 4]
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_10():
-    pass
+def task_10(*args, number):
+    return [arg for arg in args if number % arg == 0]
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -164,8 +183,18 @@ Exemplu: task_11(1, 1, 2, 3, 5, 9) ➞ False
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_11():
-    pass
+def task_11(*args):
+    if len(args) < 2:
+        return False
+    if args[0] != 1 or args[1] != 1:
+        return False
+    a, b = 1, 1
+    for i in range(2, len(args)):
+        c = a + b
+        if args[i] != c:
+            return False
+        a, b = b, c
+    return True
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -180,8 +209,14 @@ Exemplu: task_12(1, 2, 3, 4) ➞ False
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_12():
-    pass
+def task_12(*args):
+    for numar in args:
+        if numar <= 1:
+            return False
+        for i in range(2, int(numar ** 0.5) + 1):
+            if numar % i == 0:
+                return False
+    return True
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -196,8 +231,36 @@ Exemplu: task_13('hello', 'world') ➞ False
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_13():
-    pass
+def task_13(sir, *args):
+    # Failed/unfinished method
+    # for arg in args:
+    #     if len(sir) != len(arg):
+    #         return False
+    #     for i, caracter_sir in enumerate(sir):
+    #         print('caracter_sir', caracter_sir)
+    #         for j, caracter_arg in enumerate(arg):
+    #             print('caracter_arg', caracter_arg)
+    #             if caracter_sir == caracter_arg:
+    #                 arg = arg[:j] + arg[j+1:]
+    #                 break
+    #             elif caracter_sir != caracter_arg and j == len(arg):
+    #                 return False
+    #         print(arg)
+    #         if len(arg) == 0:
+    #             return True
+    # return False
+    for cuvant in args:
+        if len(sir) != len(cuvant):
+            return False
+        count1 = {}
+        count2 = {}
+        for char in sir:
+            count1[char] = count1.get(char, 0) + 1
+        for char in cuvant:
+            count2[char] = count2.get(char, 0) + 1
+        if count1 != count2:
+            return False
+    return True
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -211,8 +274,8 @@ Exemplu: task_14('home', 'same', 'meme', sub_string="me") ➞ ['home', 'meme', '
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_14():
-    pass
+def task_14(*strings, sub_string):
+    return [str_arg for str_arg in strings if sub_string in str_arg]
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -227,8 +290,9 @@ Exemplu: task_15('home', 'same', 'meme', sub_string = 'me') ➞ {'contains': ['h
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_15():
-    pass
+def task_15(*strings, sub_string):
+    return {'contains': [str_arg for str_arg in strings if sub_string in str_arg],
+            'not_contains': [str_arg for str_arg in strings if sub_string not in str_arg]}
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -317,4 +381,3 @@ def task_20():
 print(session.check_task_20(task_20))
 print(session.get_completion_percentage())
 # VERIFICATION PROCESS
-
