@@ -16,7 +16,7 @@ Creează o funcție lambda numită `task1` care adaugă 10 la un număr dat.
 """
 
 # CODUL TĂU VINE MAI JOS
-task1 = None
+task1 = lambda x: x + 10
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -28,7 +28,7 @@ Creează o funcție lambda numită `task2` care verifică dacă un număr este p
 """
 
 # CODUL TĂU VINE MAI JOS
-task2 = None
+task2 = lambda x: x % 2 == 0
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -40,7 +40,7 @@ Creează o funcție lambda numită `task3` care înmulțește două numere.
 """
 
 # CODUL TĂU VINE MAI JOS
-task3 = None
+task3 = lambda a, b: a * b
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -52,7 +52,7 @@ Crează o funcție lambda numită `task4` care returnează lungimea unui șir de
 """
 
 # CODUL TĂU VINE MAI JOS
-task4 = None
+task4 = lambda sir: len(sir)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -64,7 +64,7 @@ Creează o funcție lambda numită `task5` care convertește un șir de caracter
 """
 
 # CODUL TĂU VINE MAI JOS
-task5 = None
+task5 = lambda sir: sir.upper()
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -76,11 +76,11 @@ Creează o funcție lambda numită `task6` care găsește maximul dintre trei nu
 """
 
 # CODUL TĂU VINE MAI JOS
-task6 = None
+task6 = lambda a, b, c: max(a, b, c)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
-print(session.check_task(6 ,task6))
+print(session.check_task(6, task6))
 # VERIFICATION PROCESS
 
 """
@@ -88,7 +88,7 @@ Creează o funcție lambda numită `task7` care concatenează două șiruri de c
 """
 
 # CODUL TĂU VINE MAI JOS
-task7 = None
+task7 = lambda sir_1, sir_2: sir_1 + ' ' + sir_2
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -100,7 +100,7 @@ Creează o funcție lambda numită `task8` care filtrează numerele impare dintr
 """
 
 # CODUL TĂU VINE MAI JOS
-task8 = None
+task8 = lambda numbers: list(filter(lambda x: x % 2 == 0, numbers))
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -113,7 +113,7 @@ Creează o funcție lambda numită `task9` care calculează factorialul unui num
 
 # CODUL TĂU VINE MAI JOS
 from functools import reduce
-task9 = None
+task9 = lambda n: reduce(lambda x, y: x * y, range(1, n+1)) if n > 0 else 1
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -125,7 +125,7 @@ Creează o funcție lambda numită `task10` care sortează o listă de tuple dup
 """
 
 # CODUL TĂU VINE MAI JOS
-task10 = None
+task10 = lambda tuples: sorted(tuples, key = lambda x: x[1])
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -137,7 +137,7 @@ Creează o funcție lambda numită `task11` care returnează rădăcina pătrat�
 """
 
 # CODUL TĂU VINE MAI JOS
-task11 = None
+task11 = lambda x: x ** 0.5
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -149,7 +149,7 @@ Creează o funcție lambda numită `task12` care verifică dacă un șir de cara
 """
 
 # CODUL TĂU VINE MAI JOS
-task12 = None
+task12 = lambda sir: sir == sir[::-1]
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -161,7 +161,7 @@ Creează o funcție lambda numită `task13` care numără numărul de vocale din
 """
 
 # CODUL TĂU VINE MAI JOS
-task13 = None
+task13 = lambda sir: sum(1 for char in sir if char.lower() in 'aeiou')
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -173,7 +173,7 @@ Creează o funcție lambda numită `task14` care returnează inversul unui șir 
 """
 
 # CODUL TĂU VINE MAI JOS
-task14 = None
+task14 = lambda sir: sir[::-1]
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -185,7 +185,7 @@ Creează o funcție lambda numită `task15` care filtrează toate șirurile de c
 """
 
 # CODUL TĂU VINE MAI JOS
-task15 = None
+task15 = lambda siruri: list(filter(lambda sir: len(sir) > 5, siruri))
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS

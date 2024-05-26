@@ -147,7 +147,6 @@ class DataStatistics:
         for container in self.containers:
             total_sum += sum(container)
             total_count += len(container)
-        print('calculated mean =', total_sum / total_count if total_count != 0 else 0)
         return total_sum / total_count if total_count != 0 else 0
 
     def median(self):
@@ -185,8 +184,8 @@ Creează o clasă `DataFilter` care va primi ca input o listă de obiecte de tip
 - __init__ va inițializa clasa cu lista de obiecte.
 - `add_container` va permite adăugarea unui nou container în listă.
 - `filter_zeros` va returna o listă cu toate elementele care sunt diferite de 0.
-- `filter_negatives` va returna o listă cu toate elementele care sunt mai mari sau egale cu 0.
-- `filter_positives` va returna o listă cu toate elementele care sunt mai mici sau egale cu 0.
+- `filter_negatives` va returna o listă cu toate elementele care sunt mai mici decat 0.
+- `filter_positives` va returna o listă cu toate elementele care sunt mai mari sau egale cu 0.
 - `filter_under_mean` va returna o listă cu toate elementele care sunt mai mari decât media aritmetică a tuturor elementelor calculate cu metoda `mean` din clasa `DataStatistics`.
 """
 
@@ -213,40 +212,22 @@ class DataFilter:
     def filter_negatives(self):
         result = []
         for container in self.containers:
-            result.extend(filter(lambda x: x >= 0, container))
+            result.extend(filter(lambda x: x < 0, container))
         return result
 
     def filter_positives(self):
         result = []
         for container in self.containers:
-            result.extend(filter(lambda x: x <= 0, container))
+            result.extend(filter(lambda x: x >= 0, container))
         return result
 
     def filter_under_mean(self):
         data_stats = DataStatistics(self.containers)
-        for data in data_stats.containers:
-            print(data)
         mean_value = data_stats.mean()
-        print('rounded mean =', round(mean_value))
-        print('int mean =', int(mean_value))
         result = []
         for container in self.containers:
             result.extend(filter(lambda x: x > mean_value, container))
         return result
-
-# Testing
-container1 = DataContainer([1, 2, 3, 0, -1, -2, -3])
-container2 = DataContainer([0, 5, -5, 10, -10])
-data_filter = DataFilter([container1, container2])
-data_filter.add_container(DataContainer([-4, 6, 7]))
-all_data = []
-for data in data_filter.containers:
-    all_data.extend(data)
-print('Toate elementele:', all_data)
-print('Elemente diferite de zero:', data_filter.filter_zeros())
-print('Fara elemente negative:', data_filter.filter_negatives())
-print('Fara elemente pozitive:', data_filter.filter_positives())
-print('Fara elemente sub media aritmetica:', data_filter.filter_under_mean())
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
