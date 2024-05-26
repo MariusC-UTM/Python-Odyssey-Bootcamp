@@ -310,8 +310,18 @@ Exemplu: task_16(2, 3, 4, 5, operation='div') ➞ 0.008333333333333333
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_16():
-    pass
+def task_16(*args, operation):
+    rezultat = args[0]
+    for numar in args[1:]:
+        if operation == 'add':
+            rezultat += numar
+        elif operation == 'sub':
+            rezultat -= numar
+        elif operation == 'mul':
+            rezultat *= numar
+        elif operation == 'div':
+            rezultat /= numar
+    return rezultat
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -330,8 +340,19 @@ Exemplu: task_17(2, add=[3, 4, 5], sub=[1, 2]) ➞ 11
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_17():
-    pass
+def task_17(number, **kwargs):
+    rezultat = number
+    for operation, numbers in kwargs.items():
+        for num in numbers:
+            if operation == 'add':
+                rezultat += num
+            elif operation == 'sub':
+                rezultat -= num
+            elif operation == 'mul':
+                rezultat *= num
+            elif operation == 'div':
+                rezultat /= num
+    return rezultat
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -344,8 +365,15 @@ Exemplu: task_18('hello', 'world') ➞ {'h': 1, 'e': 1, 'l': 3, 'o': 2, 'w': 1, 
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_18():
-    pass
+def task_18(*args):
+    char_count = {}
+    for string in args:
+        for char in string:
+            if char in char_count:
+                char_count[char] += 1
+            else:
+                char_count[char] = 1
+    return char_count
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -358,8 +386,30 @@ Exemplu: task_19(1, 2, 3, 4, 5, 6, 7, 8, 9) ➞ {2: 1, 3: 1, 5: 1, 7: 1}
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_19():
-    pass
+def task_19(*args):
+    prime_count = {}
+    for num in args:
+        if num <= 1:
+            continue
+        if num == 2:
+            if num in prime_count:
+                prime_count[num] += 1
+            else:
+                prime_count[num] = 1
+            continue
+        if num % 2 == 0:
+            continue
+        is_prime = True
+        for i in range(3, int(num ** 0.5) + 1, 2):
+            if num % i == 0:
+                is_prime = False
+                break
+        if is_prime:
+            if num in prime_count:
+                prime_count[num] += 1
+            else:
+                prime_count[num] = 1
+    return prime_count
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
@@ -373,8 +423,15 @@ Exemplu: task_20('hello', 'world', 'python') ➞ {5: 2, 6: 1}
 """
 
 # CODUL TĂU VINE MAI JOS:
-def task_20():
-    pass
+def task_20(*args):
+    length_count = {}
+    for word in args:
+        length = len(word)
+        if length in length_count:
+            length_count[length] += 1
+        else:
+            length_count[length] = 1
+    return length_count
 # CODUL TĂU VINE MAI SUS:
 
 # VERIFICATION PROCESS
