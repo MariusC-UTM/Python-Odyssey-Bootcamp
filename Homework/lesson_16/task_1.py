@@ -185,7 +185,7 @@ Creează o funcție lambda numită `task15` care filtrează toate șirurile de c
 """
 
 # CODUL TĂU VINE MAI JOS
-task15 = lambda siruri: list(filter(lambda sir: len(sir) > 5, siruri))
+task15 = lambda siruri: list(filter(lambda sir: len(sir) <= 5, siruri))
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -197,7 +197,7 @@ Creează o funcție lambda numită `task16` care sortează o listă de dicționa
 """
 
 # CODUL TĂU VINE MAI JOS
-task16 = None
+task16 = lambda dictionare, key: sorted(dictionare, key = lambda dictionar: dictionar[key])
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -209,7 +209,7 @@ Creează o funcție lambda numită `task17` care găsește cel mai mare divizor 
 """
 
 # CODUL TĂU VINE MAI JOS
-task17 = None
+task17 = lambda a, b: a if b == 0 else task17(b, a % b)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -221,7 +221,7 @@ Creează o funcție lambda numită `task18` care calculează suma pătratelor nu
 """
 
 # CODUL TĂU VINE MAI JOS
-task18 = None
+task18 = lambda numere: sum(map(lambda numar: numar ** 2, filter(lambda numar: numar % 2 == 0, numere)))
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -233,7 +233,7 @@ Creează o funcție lambda numită `task19` care verifică dacă un an dat este 
 """
 
 # CODUL TĂU VINE MAI JOS
-task19 = None
+task19 = lambda an: (an % 4 == 0 and an % 100 != 0) or (an % 400 == 0)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -245,7 +245,7 @@ Creează o funcție lambda numită `task20` care găsește cel mai lung cuvânt 
 """
 
 # CODUL TĂU VINE MAI JOS
-task20 = None
+task20 = lambda cuvinte: max(cuvinte, key = len)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -259,7 +259,8 @@ Creează un generator numit `task21` care generează numere de la 1 la 10.
 
 # CODUL TĂU VINE MAI JOS
 def task21():
-    pass
+    for i in range(1, 11):
+        yield i
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -272,7 +273,8 @@ Creează un generator numit `task22` care generează pătratele numerelor de la 
 
 # CODUL TĂU VINE MAI JOS
 def task22():
-    pass
+    for i in range(1, 11):
+        yield i ** 2
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -284,8 +286,9 @@ Creează un generator numit `task23` care generează caracterele unui string pri
 """
 
 # CODUL TĂU VINE MAI JOS
-def task23():
-    pass
+def task23(sir):
+    for c in sir:
+        yield c
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -297,8 +300,12 @@ Creează un generator numit `task24` care generează numere pare până la un li
 """
 
 # CODUL TĂU VINE MAI JOS
-def task24():
-    pass
+def task24(limita):
+    numar = 2
+    while numar <= limita:
+        yield numar
+        numar += 2
+
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -310,8 +317,11 @@ Creează un generator numit `task25` care primește ca input un număr n și gen
 """
 
 # CODUL TĂU VINE MAI JOS
-def task25():
-    pass
+def task25(n):
+    fib1, fib2 = 0, 1
+    for _ in range(n):
+        yield fib1
+        fib1, fib2 = fib2, fib1 + fib2
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -323,8 +333,18 @@ Creează un generator numit `task26` care generează numere prime până la o li
 """
 
 # CODUL TĂU VINE MAI JOS
-def task26():
-    pass
+def task26(limita):
+    prime = [True] * (limita + 1)
+    prime[0] = prime[1] = False
+
+    for numar in range(2, int(limita ** 0.5) + 1):
+        if prime[numar]:
+            for multiple in range(numar * numar, limita + 1, numar):
+                prime[multiple] = False
+
+    for numar in range(2, limita + 1):
+        if prime[numar]:
+            yield numar
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -336,8 +356,11 @@ Creează un generator numit `task27` care generează numere într-un interval sp
 """
 
 # CODUL TĂU VINE MAI JOS
-def task27():
-    pass
+def task27(start, end, pas):
+    curent = start
+    while curent < end:
+        yield curent
+        curent += pas
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -352,8 +375,10 @@ output-ul va fi: "c", "ci", "cia", "ciao", "i", "ia", "iao", "a", "ao", "o"
 """
 
 # CODUL TĂU VINE MAI JOS
-def task28():
-    pass
+def task28(sir):
+    for i in range(len(sir)):
+        for j in range(i + 1, len(sir) + 1):
+            yield sir[i:j]
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -365,8 +390,11 @@ Creează un generator numit `task29` care generează factorialul numerelor de la
 """
 
 # CODUL TĂU VINE MAI JOS
-def task29():
-    pass
+def task29(n):
+    fact = 1
+    for i in range(1, n + 1):
+        fact *= i
+        yield fact
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -378,8 +406,10 @@ Creează un generator numit `task30` care generează cifrele unui număr în ord
 """
 
 # CODUL TĂU VINE MAI JOS
-def task30():
-    pass
+def task30(numar):
+    while numar > 0:
+        yield numar % 10
+        numar //= 10
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -394,8 +424,28 @@ output-ul va fi: (1,), (2,), (3,), (4,), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4),
 """
 
 # CODUL TĂU VINE MAI JOS
-def task31():
-    pass
+def task31(numere):
+    # numere.append(4)
+    print(numere)
+
+    n = len(numere)
+
+    # for lungime in range(1, n + 1):
+    #     for i in range(n - lungime + 1):
+    #         combinatie = []
+    #         for j in range(i, i + lungime):
+    #             combinatie.append(numere[j])
+    #         yield tuple(combinatie)
+    #
+    #         print(tuple(combinatie))
+
+    for i in range(1, 2 ** n):
+        subset = [numere[j] for j in range(n) if (i >> j) & 1]
+        yield tuple(subset)
+        print(tuple(subset))
+    yield tuple(numere)
+    print(tuple(numere))
+
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -407,8 +457,11 @@ Creează un generator numit `task32` care generează suma curentă a unei liste 
 """
 
 # CODUL TĂU VINE MAI JOS
-def task32():
-    pass
+def task32(numere):
+    suma = 0
+    for numar in numere:
+        suma += numar
+        yield suma
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -424,7 +477,10 @@ output-ul va fi: 1, 3, 5, 7, 9
 
 # CODUL TĂU VINE MAI JOS
 def task33(a, d, n):
-    pass
+    current_term = a
+    for _ in range(n):
+        yield current_term
+        current_term += d
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
