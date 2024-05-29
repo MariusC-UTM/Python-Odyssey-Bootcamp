@@ -425,26 +425,17 @@ output-ul va fi: (1,), (2,), (3,), (4,), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4),
 
 # CODUL TĂU VINE MAI JOS
 def task31(numere):
-    # numere.append(4)
-    print(numere)
+    all_combinations = []
 
-    n = len(numere)
+    def combinations(prefix, start):
+        for i in range(start, len(numere)):
+            combination = prefix + (numere[i],)
+            all_combinations.append(combination)
+            combinations(combination, i + 1)
 
-    # for lungime in range(1, n + 1):
-    #     for i in range(n - lungime + 1):
-    #         combinatie = []
-    #         for j in range(i, i + lungime):
-    #             combinatie.append(numere[j])
-    #         yield tuple(combinatie)
-    #
-    #         print(tuple(combinatie))
-
-    for i in range(1, 2 ** n):
-        subset = [numere[j] for j in range(n) if (i >> j) & 1]
-        yield tuple(subset)
-        print(tuple(subset))
-    yield tuple(numere)
-    print(tuple(numere))
+    combinations((), 0)
+    all_combinations.sort(key=lambda x: (len(x), x))
+    yield from all_combinations
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -529,8 +520,21 @@ output-ul va fi: (1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1
 """
 
 # CODUL TĂU VINE MAI JOS
-def task36():
-    pass
+def task36(input_list):
+    if len(input_list) == 0:
+        yield []
+    elif len(input_list) == 1:
+        yield input_list
+    else:
+        for i in range(len(input_list)):
+            current_element = input_list[i]
+            remaining_elements = input_list[:i] + input_list[i+1:]
+            for permutation in task36(remaining_elements):
+                yield tuple([current_element] + list(permutation))
+
+input_list = [1, 2, 3]
+for perm in task36(input_list):
+    print(perm)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -582,14 +586,24 @@ output-ul va fi: "abc", "acb", "bac", "bca", "cab", "cba"
 """
 
 # CODUL TĂU VINE MAI JOS
-def task39(sir):
-    def permute(sir, pas = 0):
-        if pas == len(sir):
-            yield "".join(sir)
-        for i in range(pas, len(sir)):
-            s_copie = [c for c in sir]
-            sir[pas], sir[i] = sir[i], sir[pas]
-            yield from permute(sir, pas + 1)
+def task39(input_str):
+    seen = set()
+    if len(input_str) <= 1:
+        yield input_str
+    else:
+        for i in range(len(input_str)):
+            first_char = input_str[i]
+            remaining_chars = input_str[:i] + input_str[i+1:]
+            for sub_anagram in task39(remaining_chars):
+                new_anagram = first_char + sub_anagram
+                if new_anagram not in seen:
+                    seen.add(new_anagram)
+                    yield new_anagram
+
+# Exemplu de utilizare:
+input_str = "abc"
+for anagram in task39(input_str):
+    print(anagram)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -805,6 +819,35 @@ def task49(required_role):
             return func(user, *args, **kwargs)
         return wrapper
     return decorator
+
+# Example usage:
+
+@task49('admin')
+def delete_user(user, username):
+    print(f"User {username} deleted.")
+
+@task49('editor')
+def edit_article(user, article_id, content):
+    print(f"Article {article_id} updated with new content.")
+
+# Test cases
+admin_user = {'username': 'admin_user', 'role': 'admin'}
+editor_user = {'username': 'editor_user', 'role': 'editor'}
+regular_user = {'username': 'regular_user', 'role': 'user'}
+
+delete_user(admin_user, 'some_user')
+
+try:
+    delete_user(editor_user, 'some_user')
+except PermissionError as e:
+    print(e)
+
+edit_article(editor_user, 1, 'New content')
+
+try:
+    edit_article(regular_user, 1, 'New content')
+except PermissionError as e:
+    print(e)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
