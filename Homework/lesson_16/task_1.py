@@ -391,10 +391,10 @@ Creează un generator numit `task29` care generează factorialul numerelor de la
 
 # CODUL TĂU VINE MAI JOS
 def task29(n):
-    fact = 1
+    factorial = 1
     for i in range(1, n + 1):
-        fact *= i
-        yield fact
+        factorial *= i
+        yield factorial
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -445,7 +445,6 @@ def task31(numere):
         print(tuple(subset))
     yield tuple(numere)
     print(tuple(numere))
-
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -492,8 +491,11 @@ Creează un generator numit `task34` care generează puterile lui 2 până la o 
 """
 
 # CODUL TĂU VINE MAI JOS
-def task34():
-    pass
+def task34(limita):
+    putere = 1
+    while putere <= limita:
+        yield putere
+        putere *= 2
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -508,8 +510,11 @@ output-ul va fi: 2, 6, 18, 54, 162, ...
 """
 
 # CODUL TĂU VINE MAI JOS
-def task35():
-    pass
+def task35(a, r):
+    curent = a
+    while True:
+        yield curent
+        curent *= r
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -537,8 +542,18 @@ Creează un generator numit `task37` care generează toți factorii primi ai unu
 """
 
 # CODUL TĂU VINE MAI JOS
-def task37():
-    pass
+def task37(numar):
+    while numar % 2 == 0:
+        yield 2
+        numar //= 2
+    divizor = 3
+    while numar != 1 and divizor * divizor <= numar:
+        while numar % divizor == 0:
+            yield divizor
+            numar //= divizor
+        divizor += 2
+    if numar > 2:
+        yield numar
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -550,8 +565,9 @@ Creează un generator numit `task38` care generează reprezentarea binară a num
 """
 
 # CODUL TĂU VINE MAI JOS
-def task38():
-    pass
+def task38(n):
+    for i in range(1, n + 1):
+        yield bin(i)[2:]
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -566,8 +582,14 @@ output-ul va fi: "abc", "acb", "bac", "bca", "cab", "cba"
 """
 
 # CODUL TĂU VINE MAI JOS
-def task39(s):
-    pass
+def task39(sir):
+    def permute(sir, pas = 0):
+        if pas == len(sir):
+            yield "".join(sir)
+        for i in range(pas, len(sir)):
+            s_copie = [c for c in sir]
+            sir[pas], sir[i] = sir[i], sir[pas]
+            yield from permute(sir, pas + 1)
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -585,7 +607,10 @@ Aici, n este indexul termenului (începând de la 0), iar n! (n factorial) este 
 
 # CODUL TĂU VINE MAI JOS
 def task40():
-    pass
+    n = 0
+    while True:
+        yield (-1) ** n / task9(n)
+        n += 1
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -599,8 +624,15 @@ Creează un decorator numit `task41` care afișează timpul de execuție al unei
 
 # CODUL TĂU VINE MAI JOS
 import time
-def task41():
-    pass
+def task41(functie):
+    def wrapper(*args, **kwargs):
+        time_start = time.time()
+        result = functie(*args, **kwargs)
+        time_end = time.time()
+        execution_time = time_end - time_start
+        print(f'Execution time: {execution_time:.3f} seconds')
+        return result
+    return wrapper
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -612,8 +644,13 @@ Creează un decorator numit `task42` care afișează mesaje "Before" și "After"
 """
 
 # CODUL TĂU VINE MAI JOS
-def task42():
-    pass
+def task42(functie):
+    def wrapper(*args, **kwargs):
+        print("Before")
+        result = functie(*args, **kwargs)
+        print("After")
+        return result
+    return wrapper
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -625,8 +662,28 @@ Creează un decorator numit `task43` care memorează rezultatele unei funcții �
 """
 
 # CODUL TĂU VINE MAI JOS
-def task43():
-    pass
+def task43(functie):
+    cache = {}
+    def wrapper(*args, **kwargs):
+        key = (args, tuple(frozenset(kwargs.items())))
+        print(key)
+        if key in cache:
+            print("Fetching from cache")
+            return cache[key]
+        print("Calculating new result")
+        result = functie(*args, **kwargs)
+        cache[key] = result
+        return result
+    return wrapper
+
+# Test
+@task43
+def example_function(x, y):
+    return x + y
+print(example_function(x = 1, y = 2))
+print(example_function(2, 3))
+print(example_function(1, 2))
+print(example_function(2, 3))
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -638,8 +695,14 @@ Creează un decorator numit `task44` care numără de câte ori o funcție este 
 """
 
 # CODUL TĂU VINE MAI JOS
-def task44():
-    pass
+def task44(func):
+    count = 0
+    def wrapper(*args, **kwargs):
+        nonlocal count
+        count += 1
+        print(f"Count: {count}")
+        return func(*args, **kwargs)
+    return wrapper
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -651,8 +714,13 @@ Creează un decorator numit `task45` care convertește rezultatul unei funcții 
 """
 
 # CODUL TĂU VINE MAI JOS
-def task45():
-    pass
+def task45(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        if isinstance(result, str):
+            return result.upper()
+        return result
+    return wrapper
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -664,8 +732,20 @@ Creează un decorator numit `task46` care reîncearcă o funcție dacă aceasta 
 """
 
 # CODUL TĂU VINE MAI JOS
-def task46():
-    pass
+def task46(func):
+    def wrapper(*args, **kwargs):
+        max_attempts = 3
+        attempt = 0
+        while attempt < max_attempts:
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                attempt += 1
+                print(f"Attempt {attempt} failed with exception: {e}")
+                if attempt == max_attempts:
+                    print("Max attempts reached. Function failed.")
+                    raise
+    return wrapper
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -677,8 +757,13 @@ Creează un decorator numit `task47` care adaugă o valoare specificată la valo
 """
 
 # CODUL TĂU VINE MAI JOS
-def task47():
-    pass
+def task47(value):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            return result + value
+        return wrapper
+    return decorator
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -690,8 +775,15 @@ Creează un decorator numit `task48` care validează tipurile argumentelor primi
 """
 
 # CODUL TĂU VINE MAI JOS
-def task48():
-    pass    
+def task48(expected_types):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for arg, expected_type in zip(args, expected_types):
+                if not isinstance(arg, expected_type):
+                    raise TypeError(f"Expected type {expected_type} but got {type(arg)}")
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
@@ -705,8 +797,14 @@ Aceasta va arunca o excepție `PermissionError` dacă utilizatorul nu are rolul 
 """
 
 # CODUL TĂU VINE MAI JOS
-def task49():
-    pass
+def task49(required_role):
+    def decorator(func):
+        def wrapper(user, *args, **kwargs):
+            if user.get('role') != required_role:
+                raise PermissionError(f"User does not have the required role: {required_role}")
+            return func(user, *args, **kwargs)
+        return wrapper
+    return decorator
 # CODUL TĂU VINE MAI SUS
 
 # VERIFICATION PROCESS
